@@ -1,12 +1,17 @@
 import './App.css'
-import { Typography } from '@mui/material'
+import { Container, CssBaseline, Typography } from '@mui/material'
+import { AppProvider } from './contexts/AppProvider'
+import { ThemeToggle } from './components/ThemeToogle'
 
 function App() {
   return (
-    <Typography variant="h4" color="white">
-      {' '}
-      Witaj z Bloga
-    </Typography>
+    <AppProvider>
+      <CssBaseline />
+      <Container>
+        <Typography variant='h4' gutterBottom> Test aplikacji na razzie kontekst</Typography>
+        <ThemeToggle />
+      </Container>
+    </AppProvider>
   )
 }
 
