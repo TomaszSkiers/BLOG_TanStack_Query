@@ -1,24 +1,22 @@
 import './App.css'
-import { Container, CssBaseline, Typography } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 import { AppProvider } from './contexts/AppProvider'
-import { ThemeToggle } from './components/ThemeToogle'
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { MainLayout } from './layout/MainLayout'
+import { Home } from './pages/Home'
 
-
-
-function App() {
+export const App = () => {
   return (
     <AppProvider>
       <CssBaseline />
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Application test, theme light - dark, theme provider.
-        </Typography>
-        <ThemeToggle />
-        
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </AppProvider>
   )
 }
-
-export default App
