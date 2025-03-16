@@ -20,7 +20,7 @@ const MyComponent = () => {
   console.log('Aktualna paleta motywu:', theme.palette)
 
   return (
-    <Box sx={{ p: 4, backgroundColor: theme.palette.highlight.main }}>
+    <Box sx={{ p: 4, backgroundColor: theme.palette.primary.main }}>
       <Typography variant="body1">
         To jest przykład użycia niestandardowego koloru "highlight".
       </Typography>
