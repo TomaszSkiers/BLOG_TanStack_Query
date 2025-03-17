@@ -4,13 +4,12 @@ interface ResponsiveStyles {
   container: SxProps<Theme>
   leftBox: SxProps<Theme>
   rightBox: SxProps<Theme>
-  links: SxProps<Theme>
+  links: (isActive: boolean, theme: Theme) => SxProps<Theme>
   appBar: SxProps<Theme>
 }
 
 export const getResponsiveStyles = (
   isSmallScreen: boolean,
-  theme: Theme,
 ): ResponsiveStyles => {
   return {
     appBar: {
@@ -35,11 +34,22 @@ export const getResponsiveStyles = (
       alignItems: 'center',
       gap: isSmallScreen ? '30px' : '20px',
     },
-    links: {
-      transition: 'color 0.3s ease',
+    links: (isActive: boolean, theme: Theme) => ({
+      color: isActive
+        ? theme.palette.mode === 'dark'
+          ? theme.palette.secondary.light // W dark mode linki będą jaśniejsze
+          : theme.palette.secondary.dark // W light mode linki będą ciemniejsze
+        : theme.palette.mode === 'dark'
+          ? theme.palette.grey[300] // W dark mode nieaktywne linki będą jaśniejsze
+          : theme.palette.grey[50], // W light mode standardowy kolor
+
+      textDecoration: isActive ? 'underline' : 'none',
+      textDecorationThickness: isActive ? '2px' : '0',
+      textUnderlineOffset: '4px',
+      transition: 'color 0.3s ease, text-decoration 0.3s ease',
       '&:hover': {
         color: theme.palette.secondary.main,
       },
-    },
+    }),
   }
 }

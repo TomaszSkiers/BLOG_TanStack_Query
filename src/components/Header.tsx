@@ -12,14 +12,15 @@ import { getResponsiveStyles } from '../styles/header'
 import { useMemo } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { ThemeToggle } from './ThemeToogle'
+import { NAV_LINKS } from '../constants/navLinks'
 
 export const Header = () => {
   const location: Location = useLocation()
-  const isSmallScreen: boolean = useMediaQuery('(max-width: 800px)')
   const theme = useTheme()
+  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
   const styles = useMemo(
-    () => getResponsiveStyles(isSmallScreen, theme),
-    [isSmallScreen],
+    () => getResponsiveStyles(isSmallScreen),
+    [isSmallScreen, theme],
   )
 
   return (
@@ -39,32 +40,26 @@ export const Header = () => {
           </Box>
 
           {/* right side - links */}
-          <Box sx={styles.rightBox}>
-            {[
-              { path: '/', label: 'O mnie' },
-              { path: '/blog', label: 'Blog' },
-              { path: '/contact', label: 'Kontakt' },
-            ].map(({ path, label }) => {
+          <Box
+            component="nav"
+            sx={styles.rightBox}
+            aria-label="Główna nawigacja"
+          >
+            {NAV_LINKS.map(({ path, label }) => {
               const isActive = location.pathname === path
               return (
                 <Link
                   key={path}
                   component={RouterLink}
                   to={path}
-                  sx={{
-                    ...styles.links,
-                    color: isActive
-                      ? theme.palette.secondary.dark
-                      : theme.palette.grey[50],
-                    textDecoration: isActive ? 'underline' : 'none',
-                    textDecorationThickness: isActive ? '2px' : '0',
-                    textUnderlineOffset: '4px',
-                  }}
+                  sx={styles.links(isActive, theme)}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {label}
                 </Link>
               )
             })}
+
             <ThemeToggle />
           </Box>
         </Container>
