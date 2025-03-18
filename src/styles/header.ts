@@ -35,20 +35,28 @@ export const getResponsiveStyles = (
       gap: isSmallScreen ? '30px' : '20px',
     },
     links: (isActive: boolean, theme: Theme) => ({
+      position: 'relative', 
       color: isActive
         ? theme.palette.mode === 'dark'
-          ? theme.palette.secondary.light // W dark mode linki będą jaśniejsze
-          : theme.palette.secondary.dark // W light mode linki będą ciemniejsze
+          ? theme.palette.secondary.light
+          : theme.palette.secondary.dark
         : theme.palette.mode === 'dark'
-          ? theme.palette.grey[300] // W dark mode nieaktywne linki będą jaśniejsze
-          : theme.palette.grey[50], // W light mode standardowy kolor
+          ? theme.palette.grey[300]
+          : theme.palette.grey[50],
+      textDecoration: 'none',
 
-      textDecoration: isActive ? 'underline' : 'none',
-      textDecorationThickness: isActive ? '2px' : '0',
-      textUnderlineOffset: '4px',
-      transition: 'color 0.3s ease, text-decoration 0.3s ease',
-      '&:hover': {
-        color: theme.palette.secondary.main,
+      '&::after': {
+        content: '""',
+        display: 'block',
+        width: isActive ? '100%' : '0%',
+        height: '2px',
+        backgroundColor: theme.palette.secondary.main,
+        transition: 'width 0.3s ease-in-out, transform 0.3s ease-in-out',
+        transformOrigin: 'left',
+      },
+
+      '&:hover::after': {
+        width: '100%',
       },
     }),
   }
