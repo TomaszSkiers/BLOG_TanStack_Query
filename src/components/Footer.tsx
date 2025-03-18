@@ -11,8 +11,6 @@ export const Footer = () => {
   return (
     <Box component="footer" sx={styles.footer}>
       <Container maxWidth="md" sx={styles.container}>
-        {' '}
-        {/* Używamy "sm" dla lepszej responsywności */}
         <Typography variant="body2" sx={styles.copyright}>
           © {new Date().getFullYear()} Tomasz Skierś. Wszelkie prawa
           zastrzeżone.

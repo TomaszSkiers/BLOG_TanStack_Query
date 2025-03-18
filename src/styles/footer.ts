@@ -15,8 +15,8 @@ export const getFooterStyles = (theme: Theme): FooterStyles => ({
     padding: theme.spacing(1, 1),
   },
   copyright: {
-    marginTop: theme.spacing(2), // Większy margines na mobile
-    fontSize: 'clamp(0.75rem, 2vw, 1rem)', // Dynamiczny rozmiar tekstu
+    marginTop: theme.spacing(2), 
+    fontSize: 'clamp(0.75rem, 2vw, 1rem)', 
     color: theme.palette.grey[500],
     m: 0,
   },
