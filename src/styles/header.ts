@@ -21,7 +21,7 @@ export const getResponsiveStyles = (
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '100%',
-      padding: '20px',
+      padding: '20px 0',
     },
     leftBox: {
       textAlign: isSmallScreen ? 'center' : 'left',
@@ -48,7 +48,7 @@ export const getResponsiveStyles = (
       '&::after': {
         content: '""',
         display: 'block',
-        width: isActive ? '100%' : '0%',
+        width: 0,
         height: '2px',
         backgroundColor: theme.palette.secondary.main,
         transition: 'width 0.3s ease-in-out, transform 0.3s ease-in-out',

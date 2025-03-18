@@ -1,16 +1,24 @@
-import { Box, Typography } from "@mui/material"
-
-
-
+import { Box, Container, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { getFooterStyles } from '../styles/footer'
+import { useMemo } from 'react'
+import { ThemeToggle } from './ThemeToogle'
 
 export const Footer = () => {
+  const theme = useTheme()
+  const styles = useMemo(() => getFooterStyles(theme), [theme])
 
-
-    return(
-        <Box component='footer' py={2} textAlign='center' bgcolor='grey.200'>
-            <Typography variant="body2">
-            © {new Date().getFullYear()} My Blog
-            </Typography>
-        </Box>
-    )
+  return (
+    <Box component="footer" sx={styles.footer}>
+      <Container maxWidth="md" sx={styles.container}>
+        {' '}
+        {/* Używamy "sm" dla lepszej responsywności */}
+        <Typography variant="body2" sx={styles.copyright}>
+          © {new Date().getFullYear()} Tomasz Skierś. Wszelkie prawa
+          zastrzeżone.
+        </Typography>
+        <ThemeToggle/>
+      </Container>
+    </Box>
+  )
 }

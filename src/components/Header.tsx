@@ -10,7 +10,6 @@ import {
 import { getResponsiveStyles } from '../styles/header'
 import { memo, useMemo } from 'react'
 import { useTheme } from '@mui/material/styles'
-import { ThemeToggle } from './ThemeToogle'
 import { NavLinks } from './NavLinks'
 
 export const Header = memo(() => {
@@ -25,7 +24,6 @@ export const Header = memo(() => {
     <AppBar position="static" sx={styles.appBar}>
       <Toolbar>
         <Container maxWidth="md" sx={styles.container}>
-          
           {/* Left side - name and motivational quote*/}
           <Box sx={styles.leftBox}>
             <Typography sx={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)' }}>
@@ -45,8 +43,6 @@ export const Header = memo(() => {
             aria-label="Główna nawigacja"
           >
             <NavLinks />
-
-            <ThemeToggle />
           </Box>
         </Container>
       </Toolbar>
