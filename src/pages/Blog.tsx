@@ -1,5 +1,11 @@
-import { Typography } from "@mui/material"
+import { Container, Typography } from '@mui/material'
+import { PostList } from '../components/PostsList'
 
 export const Blog = () => {
-    return(<Typography>Witam ze strony Bloga</Typography>)
+  return (
+    <Container maxWidth='md'>
+      <Typography>Witam ze strony Bloga</Typography>
+      <PostList/>
+    </Container>
+  )
 }

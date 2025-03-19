@@ -3,6 +3,8 @@ import { FooterStyles } from '../types/footerTypes'
 
 export const getFooterStyles = (theme: Theme): FooterStyles => ({
   footer: {
+    position: 'sticky',
+    bottom: '0px',
     backgroundColor: theme.palette.background.default,
     color: theme.palette.text.primary,
     borderTop: `1px solid ${theme.palette.divider}`,

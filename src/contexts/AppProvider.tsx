@@ -1,11 +1,13 @@
-import { ReactNode } from "react"
-import { ThemeProviderWrapper } from "./ThemeContext"
+import { ReactNode } from 'react'
+import { ThemeProviderWrapper } from './ThemeContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
 
-//TODO hera are all providers for App eg: themProvider, useQuery Provider 
-
-export const AppProvider = ({children}: {children: ReactNode}) => {
-    return (
-        <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
-    )
+export const AppProvider = ({ children }: { children: ReactNode }) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
+    </QueryClientProvider>
+  )
 }

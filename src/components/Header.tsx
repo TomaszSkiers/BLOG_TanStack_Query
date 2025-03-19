@@ -21,7 +21,7 @@ export const Header = memo(() => {
   )
 
   return (
-    <AppBar position="static" sx={styles.appBar}>
+    <AppBar sx={styles.appBar}>
       <Toolbar>
         <Container maxWidth="md" sx={styles.container}>
           {/* Left side - name and motivational quote*/}

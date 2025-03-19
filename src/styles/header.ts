@@ -9,6 +9,7 @@ export const getHeaderStyles = (
   return {
     appBar: {
       justifyContent: 'center',
+      position: "sticky",
     },
     container: {
       display: 'flex',
