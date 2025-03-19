@@ -1,16 +1,11 @@
-import { Theme, SxProps } from '@mui/material/styles'
+import { Theme } from '@mui/material/styles'
+import {HeaderStyles} from '../types/headerTypes'
 
-interface ResponsiveStyles {
-  container: SxProps<Theme>
-  leftBox: SxProps<Theme>
-  rightBox: SxProps<Theme>
-  links: (isActive: boolean, theme: Theme) => SxProps<Theme>
-  appBar: SxProps<Theme>
-}
 
-export const getResponsiveStyles = (
+
+export const getHeaderStyles = (
   isSmallScreen: boolean,
-): ResponsiveStyles => {
+): HeaderStyles => {
   return {
     appBar: {
       justifyContent: 'center',

@@ -3,7 +3,7 @@ import { memo, useMemo } from 'react'
 import { Link as RouterLink, useLocation} from 'react-router-dom'
 import { NAV_LINKS } from '../constants/navLinks'
 
-import { getResponsiveStyles } from '../styles/header'
+import { getHeaderStyles } from '../styles/header'
 import { Link, useMediaQuery } from '@mui/material'
 
 export const NavLinks = memo(() => {
@@ -11,7 +11,7 @@ export const NavLinks = memo(() => {
   const theme = useTheme()
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
   const styles = useMemo(
-    () => getResponsiveStyles(isSmallScreen),
+    () => getHeaderStyles(isSmallScreen),
     [isSmallScreen, theme],
   )
 

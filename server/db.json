@@ -1,0 +1,103 @@
+{
+    "articles": [
+      {
+        "id": 1,
+        "title": "Wprowadzenie do React.js",
+        "content": "React.js to popularna biblioteka do budowy interfejsów użytkownika...",
+        "fullContent": "React.js to popularna biblioteka do budowy interfejsów użytkownika stworzona przez Facebooka. W artykule omawiamy podstawy składni JSX, komponenty oraz stan aplikacji.",
+        "authorId": 1,
+        "tags": ["React", "JavaScript", "Frontend"],
+        "createdAt": "2024-03-18T10:00:00Z"
+      },
+      {
+        "id": 2,
+        "title": "Jak działa TanStack Query?",
+        "content": "TanStack Query to zaawansowane narzędzie do obsługi zapytań do API...",
+        "fullContent": "TanStack Query (dawniej React Query) ułatwia obsługę zapytań HTTP, cachowanie danych oraz ich synchronizację. W tym artykule omawiamy jego główne funkcjonalności oraz sposób implementacji.",
+        "authorId": 2,
+        "tags": ["React", "TanStack Query", "API"],
+        "createdAt": "2024-03-17T12:00:00Z"
+      },
+      {
+        "id": 3,
+        "title": "Zrozumienie Promisów w JavaScript",
+        "content": "Promisy w JavaScript pozwalają na asynchroniczne wykonywanie kodu...",
+        "fullContent": "Promisy w JavaScript to obiekt reprezentujący operację, która może się zakończyć sukcesem lub błędem. W artykule omawiamy podstawowe metody: `.then()`, `.catch()`, `.finally()` oraz wykorzystanie `async/await`.",
+        "authorId": 3,
+        "tags": ["JavaScript", "Asynchroniczność", "Promisy"],
+        "createdAt": "2024-03-16T14:30:00Z"
+      },
+      {
+        "id": 4,
+        "title": "REST API vs GraphQL",
+        "content": "Oba podejścia pozwalają na komunikację z backendem, ale różnią się...",
+        "fullContent": "REST API opiera się na zasobach i standardowych metodach HTTP, natomiast GraphQL pozwala klientowi precyzyjnie określić, jakie dane chce otrzymać. W artykule porównujemy oba podejścia pod kątem wydajności i elastyczności.",
+        "authorId": 4,
+        "tags": ["API", "GraphQL", "REST"],
+        "createdAt": "2024-03-15T09:20:00Z"
+      },
+      {
+        "id": 5,
+        "title": "Docker – podstawy konteneryzacji",
+        "content": "Docker umożliwia łatwe zarządzanie środowiskiem aplikacji...",
+        "fullContent": "Docker pozwala na uruchamianie aplikacji w izolowanych kontenerach. W artykule przedstawiamy podstawowe komendy Docker CLI, tworzenie `Dockerfile` oraz pracę z `docker-compose`.",
+        "authorId": 5,
+        "tags": ["DevOps", "Docker", "Konteneryzacja"],
+        "createdAt": "2024-03-14T18:45:00Z"
+      },
+      {
+        "id": 6,
+        "title": "Zarządzanie stanem w Redux",
+        "content": "Redux to jedno z najpopularniejszych narzędzi do zarządzania stanem...",
+        "fullContent": "Redux zapewnia globalne zarządzanie stanem aplikacji w sposób przewidywalny. W artykule omawiamy koncept `store`, `reducers`, `actions` oraz integrację z React.",
+        "authorId": 1,
+        "tags": ["Redux", "React", "Zarządzanie stanem"],
+        "createdAt": "2024-03-13T10:10:00Z"
+      },
+      {
+        "id": 7,
+        "title": "Testowanie jednostkowe w Jest",
+        "content": "Jest to popularne narzędzie do testowania kodu JavaScript...",
+        "fullContent": "Jest pozwala na szybkie i skuteczne testowanie jednostkowe kodu JavaScript. W artykule prezentujemy podstawowe asercje, mockowanie oraz testowanie komponentów React.",
+        "authorId": 2,
+        "tags": ["Testowanie", "Jest", "React"],
+        "createdAt": "2024-03-12T15:20:00Z"
+      },
+      {
+        "id": 8,
+        "title": "Node.js – przewodnik dla początkujących",
+        "content": "Node.js umożliwia uruchamianie JavaScript na serwerze...",
+        "fullContent": "Node.js to środowisko uruchomieniowe JavaScript oparte na silniku V8. W artykule przedstawiamy jego podstawowe możliwości, jak tworzenie serwera HTTP i obsługę plików.",
+        "authorId": 3,
+        "tags": ["Node.js", "Backend", "JavaScript"],
+        "createdAt": "2024-03-11T11:50:00Z"
+      },
+      {
+        "id": 9,
+        "title": "TypeScript – zalety i wady",
+        "content": "TypeScript rozszerza JavaScript o typowanie statyczne...",
+        "fullContent": "TypeScript pozwala na lepszą organizację kodu i redukcję błędów poprzez statyczne typowanie. W artykule omawiamy jego zalety, wady i porównanie do zwykłego JavaScriptu.",
+        "authorId": 4,
+        "tags": ["TypeScript", "JavaScript", "Bezpieczeństwo kodu"],
+        "createdAt": "2024-03-10T08:40:00Z"
+      },
+      {
+        "id": 10,
+        "title": "Jak działa Webpack?",
+        "content": "Webpack to potężne narzędzie do bundlowania aplikacji frontendowych...",
+        "fullContent": "Webpack pozwala na organizowanie plików JavaScript, CSS i obrazów w zoptymalizowane paczki. W artykule omawiamy jego konfigurację i działanie.",
+        "authorId": 5,
+        "tags": ["Webpack", "Frontend", "Optymalizacja"],
+        "createdAt": "2024-03-09T14:15:00Z"
+      }
+    ],
+    "users": [
+      { "id": 1, "name": "Jan Kowalski", "email": "jan.kowalski@example.com" },
+      { "id": 2, "name": "Anna Nowak", "email": "anna.nowak@example.com" },
+      { "id": 3, "name": "Piotr Wiśniewski", "email": "piotr.wisniewski@example.com" },
+      { "id": 4, "name": "Katarzyna Zielińska", "email": "katarzyna.zielinska@example.com" },
+      { "id": 5, "name": "Tomasz Lewandowski", "email": "tomasz.lewandowski@example.com" }
+    ],
+    "comments": []
+  }
+  

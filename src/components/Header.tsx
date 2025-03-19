@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from '@mui/material'
 
-import { getResponsiveStyles } from '../styles/header'
+import { getHeaderStyles } from '../styles/header'
 import { memo, useMemo } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { NavLinks } from './NavLinks'
@@ -16,7 +16,7 @@ export const Header = memo(() => {
   const theme = useTheme()
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
   const styles = useMemo(
-    () => getResponsiveStyles(isSmallScreen),
+    () => getHeaderStyles(isSmallScreen),
     [isSmallScreen, theme],
   )
 

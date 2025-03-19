@@ -1,10 +1,5 @@
-import { Theme, SxProps } from '@mui/material/styles'
-
-interface FooterStyles {
-  footer: SxProps<Theme>
-  copyright: SxProps<Theme>
-  container: SxProps<Theme>
-}
+import { Theme } from '@mui/material/styles'
+import { FooterStyles } from '../types/footerTypes' 
 
 export const getFooterStyles = (theme: Theme): FooterStyles => ({
   footer: {
