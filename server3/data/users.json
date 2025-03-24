@@ -1,0 +1,17 @@
+[
+  {
+    "id": "e7769b58-cd45-4788-b4ce-2ea609378f40",
+    "email": "test@example.com",
+    "password": "$2b$10$ICEi8XzA6uunLe9SWFy2..IlZCvTD4wbj6XyoO/QVBNHWfECPFNUO"
+  },
+  {
+    "id": "902737fd-82d4-48e9-9cd0-d2dddb3f8072",
+    "email": "tomasz.skiers@gmail.com",
+    "password": "$2b$10$4CEULAzOpNwoE6Jrfm33COcN4OL5eEb8OVd.gfwp7h8AkfqrDNve6"
+  },
+  {
+    "id": "6d62f826-221d-414d-9e2e-222f7bea7708",
+    "email": "tomsz.skiers@gmail.com",
+    "password": "$2b$10$ZL1AMLEoAsPKVIQbLz9f5.Q6PGykBo9JDLyjTZ3SzgRsP6kEfqyxq"
+  }
+]
