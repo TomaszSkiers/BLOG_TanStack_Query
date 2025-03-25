@@ -6,12 +6,15 @@ export const authMiddleware = async (c, next) => {
     return c.json({ error: 'Brak tokenu autoryzacyjnego' }, 401)
   }
 
-  const result = verifyToken(token) // Weryfikuj token
+  const result = verifyToken(token)
+  console.log('decoded JWT', result)
 
-  if (result.valid === false) {
+  if (!result.valid) {
     return c.json({ error: result.error, expiredAt: result.expiredAt }, 401)
   }
 
-  c.set('userId', result.decoded.userId) // Zapisz ID użytkownika w kontekście
-  await next() // Przejdź do następnego middleware lub endpointu
+  c.set('userId', result.decoded.userId)
+  await next()
 }
+
+

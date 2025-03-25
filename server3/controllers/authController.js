@@ -53,6 +53,22 @@ authController.post('/register', async (c) => {
   return c.json({ message: 'Użytkownik zarejestrowany', user: newUser })
 })
 
+/**
+ * curl -X POST http://localhost:3000/auth/register \
+ * -H "Content-Type: application/json" \
+ * -d '{"email":"test@example.com", "password":"haslo123"}
+ * 
+ * to utworzy mi obiekt w bazie danych
+  [
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "email": "test@example.com",
+      "password": "$2a$10$..."
+    }
+  ]
+ */
+
+
 //* Endpoint do logowania użytkownika
 
 authController.post('/login', async (c) => {
@@ -87,3 +103,9 @@ authController.post('/login', async (c) => {
   console.log('wygenerowano nowy token:', token)
   return c.json({ token })
 })
+
+/**
+ * curl -X POST http://localhost:3000/auth/login \
+ * -H "Content-Type: application/json" \
+ * -d '{"email": "test@example.com", "password": "haslo123"}'
+ */

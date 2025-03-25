@@ -21,6 +21,7 @@ app.use('/profile', authMiddleware) //Użyj middleware autoryzacji
 
 app.get('/profile', (c) => {
   const userId = c.get('userId')
+  console.log('userid z app ' ,userId)
   return c.json({message: `Witaj użytkowniku ${userId}`})
 })
 

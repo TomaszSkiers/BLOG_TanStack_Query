@@ -10,10 +10,11 @@ export const generateToken = (userId) => {
 // Weryfikacja tokenu
 export const verifyToken = (token) => {
   try {
-    return jwt.verify(token, JWT_SECRET) // Zwróci zdekodowany token, jeśli jest poprawny
+    const decoded = jwt.verify(token, JWT_SECRET)
+    return {valid: true, decoded} // Zwróci zdekodowany token, jeśli jest poprawny
   } catch (err) {
     console.error('Błąd weryfikacji tokenu:', err.message) 
-    
+
     if (err.name === 'TokenExpiredError') {
       return { valid: false, error: 'Token wygasł', expiredAt: err.expiredAt }
     } else if (err.name === 'JsonWebTokenError') {
