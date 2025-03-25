@@ -7,6 +7,7 @@ import { postsController } from './controllers/postsController.js'
 import { corsMiddleware } from './middlewares/corsMiddleware.js'
 import { authController } from './controllers/authController.js'
 import { authMiddleware } from './middlewares/authMiddleware.js'
+import { requireAdmin } from './middlewares/requireAdmin.js'
 
 const app = new Hono()
 
@@ -23,6 +24,10 @@ app.get('/profile', (c) => {
   const userId = c.get('userId')
   console.log('userid z app ' ,userId)
   return c.json({message: `Witaj użytkowniku ${userId}`})
+})
+
+app.get('/admin-panel', authMiddleware, requireAdmin, (c) => {
+  return c.json({message: 'Witaj adminie'})
 })
 
 serve({

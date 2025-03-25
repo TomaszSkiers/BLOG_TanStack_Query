@@ -12,17 +12,19 @@ export const authController = new Hono()
 //* Endpoint do dodawania użytkownika
 authController.post('/register', async (c) => {
   const body = await c.req.json() // Pobierz całe body
-  console.log('endpoint /register trzymane dane:', body)
+  console.log('endpoint /register')
+  console.log('dane z frontendu', body)
 
   const { email, password } = body
 
   // Sprawdź, czy email i hasło zostały przesłane
   if (!email || !password) {
-    return c.json({ error: 'Email i hasło są wymagane' }, 400)
+    return c.json({ error: 'Email, hasło i rola są wymagane' }, 400)
   }
 
   console.log('Email:', email)
   console.log('Hasło:', password)
+  
 
   // Sprawdź, czy użytkownik już istnieje
   const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
@@ -40,6 +42,7 @@ authController.post('/register', async (c) => {
     id: uuidv4(), // Unikalne ID
     email, // Przypisz email z żądania
     password: hashedPassword, // Przypisz zahashowane hasło
+    role: 'user', // Przypisz rolę 
   }
 
   console.log('Nowy użytkownik:', newUser)
@@ -63,7 +66,8 @@ authController.post('/register', async (c) => {
     {
       "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
       "email": "test@example.com",
-      "password": "$2a$10$..."
+      "password": "$2a$10$...",
+      "role": "user",
     }
   ]
  */
@@ -99,7 +103,7 @@ authController.post('/login', async (c) => {
   }
 
   // Wygeneruj token JWT
-  const token = generateToken(user.id)
+  const token = generateToken(user)
   console.log('wygenerowano nowy token:', token)
   return c.json({ token })
 })

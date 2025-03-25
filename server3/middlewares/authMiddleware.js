@@ -14,7 +14,7 @@ export const authMiddleware = async (c, next) => {
   }
 
   c.set('userId', result.decoded.userId)
+  c.set('role', result.decoded.role)
   await next()
 }
-
 

@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken'
 const JWT_SECRET = 'tajny-klucz' // W produkcji użyj zmiennej środowiskowej!
 
 // Generowanie tokenu
-export const generateToken = (userId) => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' }) // Poprawione: expiresIn zamiast expires
+export const generateToken = (user) => {
+  return jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' }) // Poprawione: expiresIn zamiast expires
 }
 
 // Weryfikacja tokenu
