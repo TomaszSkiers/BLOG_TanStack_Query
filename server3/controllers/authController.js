@@ -4,6 +4,8 @@ import path from 'path'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { generateToken } from '../utils/jwt.js'
+import { authMiddleware } from '../middlewares/authMiddleware.js'
+import { requireAdmin } from '../middlewares/requireAdmin.js'
 
 const usersPath = path.resolve(process.cwd(), 'server3/data/users.json')
 
@@ -24,7 +26,6 @@ authController.post('/register', async (c) => {
 
   console.log('Email:', email)
   console.log('Hasło:', password)
-  
 
   // Sprawdź, czy użytkownik już istnieje
   const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
@@ -42,7 +43,7 @@ authController.post('/register', async (c) => {
     id: uuidv4(), // Unikalne ID
     email, // Przypisz email z żądania
     password: hashedPassword, // Przypisz zahashowane hasło
-    role: 'user', // Przypisz rolę 
+    role: 'user', // Przypisz rolę
   }
 
   console.log('Nowy użytkownik:', newUser)
@@ -72,9 +73,7 @@ authController.post('/register', async (c) => {
   ]
  */
 
-
 //* Endpoint do logowania użytkownika
-
 authController.post('/login', async (c) => {
   const body = await c.req.json()
   console.log('endpoint /login otrzymane dane:', body)
@@ -112,4 +111,46 @@ authController.post('/login', async (c) => {
  * curl -X POST http://localhost:3000/auth/login \
  * -H "Content-Type: application/json" \
  * -d '{"email": "test@example.com", "password": "haslo123"}'
+ */
+
+//* Endpoint do wyświetlania wszystkich użytkowników
+authController.get('/users',authMiddleware, requireAdmin, async (c) => {
+  try {
+    const data = await fs.readFile(usersPath, 'utf-8')
+    const users = JSON.parse(data)
+    return c.json(users)
+  } catch (error) {
+    return c.json(
+      { error: 'nie można odczytać pliku users.json -> /users' },
+      500,
+    )
+  }
+})
+
+/**
+ * endpoint wykorzystuje autoryzację, i wymaga uprawnień admina
+ * do wyświetlenia użytkowników z bazy danych
+ */
+
+//* Endpoint do usuwania użytkownika
+authController.delete('/users/:id', authMiddleware, requireAdmin, async (c)=>{
+  const idToDelete = c.req.param('id')
+
+  try {
+    const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
+    const index = users.findIndex((user) => user.id === idToDelete)
+    if(index === -1) {
+      return c.json({error: 'Użytkownik nie znaleziony'}, 404)
+    }
+    const deletedUser = users.splice(index, 1)[0]
+    await fs.writeFile(usersPath, JSON.stringify(users, null, 2))
+    return c.json({message: 'Użytkownik usunięty', user: deletedUser})
+  }catch (error) {
+    console.error('Błąd przy usuwaniu użytkownika', err)
+    return c.json({error: 'Wystąpił błąd serwera'}, 500)
+  }
+})
+
+/**
+ * to muszę sobie jeszcze przeanalizować 
  */

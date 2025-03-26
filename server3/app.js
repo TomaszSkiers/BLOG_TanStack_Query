@@ -60,6 +60,7 @@ app.get('/admin-panel', authMiddleware, requireAdmin, (c) => {
  * wykorzystuje token do autoryzacji użytkownika
  */
 
+
 serve({
   fetch: app.fetch,
   port: 3000,
