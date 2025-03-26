@@ -15,3 +15,7 @@ postsController.get('/posts', async (c) => {
         return c.json({error: 'nie można odczytać pliku db.json -> postsController'}, 500)
     }
 })
+
+/**
+ * curl -X GET http://localhost:3000/posts
+ */
