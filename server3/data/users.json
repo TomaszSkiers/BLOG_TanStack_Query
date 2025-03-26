@@ -1,14 +1,8 @@
 [
   {
-    "id": "4b322694-3122-49fd-8038-d2cb2343dfce",
+    "id": "7c474af1-4a94-45cc-a4df-c6dae46b7c15",
     "email": "tomasz.skiers@gmail.com",
-    "password": "$2b$10$cFkPINKkonS1SmYcL0D/LeVFRMlbIsUVyorD8sDbf40GcxAPrERrq",
-    "role": "admin"
-  },
-  {
-    "id": "0f083052-9997-4113-a77d-829d253f74e2",
-    "email": "test@gmail.com",
-    "password": "$2b$10$F1pR4gBN3SLlrc0D0WF2o.OieIhuxeSdNphYp9/eIztMKpOiwki66",
+    "password": "$2b$10$QsRD1WeDU.QIoj323avU9.TrR7KU.SZwbpORv5x88i6omKt4K2nq.",
     "role": "user"
   }
 ]

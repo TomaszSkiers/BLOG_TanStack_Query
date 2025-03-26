@@ -1,8 +1,5 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
-import fs from 'fs/promises'
-import path from 'path'
-import { cors } from 'hono/cors'
 import { postsController } from './controllers/postsController.js'
 import { corsMiddleware } from './middlewares/corsMiddleware.js'
 import { authController } from './controllers/authController.js'
@@ -56,7 +53,7 @@ app.get('/admin-panel', authMiddleware, requireAdmin, (c) => {
   return c.json({message: 'Witaj adminie'})
 })
 /**
- * curl -X Get http://localhost:3000/admin-panel \
+ * curl -X GET http://localhost:3000/admin-panel \
  * -H "Authorization: Bearer <token>"
  * to jest endpoint
  * http://localhost:3000/admin-panel
