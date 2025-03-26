@@ -15,6 +15,6 @@
     "id": "75fb2140-f546-4878-8475-e7b9fde7a284",
     "email": "michal.skiers@gmail.com",
     "password": "$2b$10$coDD8ugMJoJIThCZD7T1yuEiXG084mCSW5ptOw0phoUj3IZRXmGgC",
-    "role": "user"
+    "role": "superUser"
   }
 ]

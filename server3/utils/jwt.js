@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 // Generowanie tokenu
 export const generateToken = (user) => {
-  return jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' }) // Poprawione: expiresIn zamiast expires
+  return jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1d' }) // Poprawione: expiresIn zamiast expires
 }
 /**
  * generowany jest token, w którm zakodowany jest nr id i admin/user,

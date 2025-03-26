@@ -113,6 +113,24 @@ authController.post('/login', async (c) => {
  * -d '{"email": "test@example.com", "password": "haslo123"}'
  */
 
+/**
+ * komendy httpie
+ * http POST http://localhost:3000/auth/login \
+ * email=test@example.com \
+ * password=haslo123
+ */
+
+/**
+ * zapis tokena do zmiennej w celu późniejszego użycia
+ * zainstaluj sudo apt install jq
+ * 
+ * TOKEN=$(http --body POST http://localhost:3000/auth/login \
+ * email=test@example.com password=haslo123 | jq -r .token)
+ * 
+ * http GET http://localhost:3000/profile \
+ * "Authorization: Bearer $TOKEN"
+ */
+
 //* Endpoint do wyświetlania wszystkich użytkowników
 authController.get('/users',authMiddleware, requireAdmin, async (c) => {
   try {
@@ -152,5 +170,43 @@ authController.delete('/users/:id', authMiddleware, requireAdmin, async (c)=>{
 })
 
 /**
+ * http DELETE http://localhost:3000/auth/users/<userId> \
+ * "Authoriztion: Bearer <token_admina>"
+ * 
  * to muszę sobie jeszcze przeanalizować 
+ */
+
+
+//! aktualizacja użytkownika trzeba poprawić !!!
+//* zalogowany jako admin mogę zmienić każdego usera
+//* zalogowany jako user mogę zmienić tylko siebie
+
+authController.patch('/users/:id', authMiddleware, async(c)=>{
+  const userId = c.req.param('id')
+  const updates = await c.req.json()
+
+  try{
+    const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
+    const user = users.find((user) => user.id === userId)
+    if(!user) {
+      return c.json({error: 'Użytkownik nie znaleziony'}, 404)
+    }
+    if (updates.email) user.email = updates.email
+    if (updates.password) user.password = await bcrypt.hash(updates.password, 10)
+    if (updates.role) user.role = updates.role
+
+    await fs.writeFile(usersPath, JSON.stringify(users, null, 2))
+    return c.json({message: 'Użytkownik zaktualizowany', user})
+  }catch(error){
+    console.log('Błąd przy aktualizacji:', error)
+    return c.json({error: 'Błąd serwera'}, 500)
+  }
+})
+
+/**
+ * httpie
+ * 
+ * http PATCH http://localhost:3000/auth/users/<id> \
+ * "Authorization:Bearer $TOKEN" \
+ * role=admin
  */
