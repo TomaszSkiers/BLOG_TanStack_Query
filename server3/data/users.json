@@ -7,14 +7,14 @@
   },
   {
     "id": "daad68b2-ce89-43b3-aeb8-d7143ef277b7",
-    "email": "ola.skiers@gmail.com",
+    "email": "nowa.ola@gmail.com",
     "password": "$2b$10$JMflwT1Prup.zQPLf.yqEOgI8vx4kXCQpqDWqbL5OKCK6rPYyX5IC",
     "role": "user"
   },
   {
     "id": "75fb2140-f546-4878-8475-e7b9fde7a284",
-    "email": "michal.skiers@gmail.com",
+    "email": "nowy.michal@gmail.com",
     "password": "$2b$10$coDD8ugMJoJIThCZD7T1yuEiXG084mCSW5ptOw0phoUj3IZRXmGgC",
-    "role": "superUser"
+    "role": "user"
   }
 ]

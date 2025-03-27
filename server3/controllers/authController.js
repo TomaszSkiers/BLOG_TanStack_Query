@@ -123,16 +123,16 @@ authController.post('/login', async (c) => {
 /**
  * zapis tokena do zmiennej w celu późniejszego użycia
  * zainstaluj sudo apt install jq
- * 
+ *
  * TOKEN=$(http --body POST http://localhost:3000/auth/login \
  * email=test@example.com password=haslo123 | jq -r .token)
- * 
+ *
  * http GET http://localhost:3000/profile \
  * "Authorization: Bearer $TOKEN"
  */
 
 //* Endpoint do wyświetlania wszystkich użytkowników
-authController.get('/users',authMiddleware, requireAdmin, async (c) => {
+authController.get('/users', authMiddleware, requireAdmin, async (c) => {
   try {
     const data = await fs.readFile(usersPath, 'utf-8')
     const users = JSON.parse(data)
@@ -151,62 +151,79 @@ authController.get('/users',authMiddleware, requireAdmin, async (c) => {
  */
 
 //* Endpoint do usuwania użytkownika
-authController.delete('/users/:id', authMiddleware, requireAdmin, async (c)=>{
+authController.delete('/users/:id', authMiddleware, requireAdmin, async (c) => {
   const idToDelete = c.req.param('id')
 
   try {
     const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
     const index = users.findIndex((user) => user.id === idToDelete)
-    if(index === -1) {
-      return c.json({error: 'Użytkownik nie znaleziony'}, 404)
+    if (index === -1) {
+      return c.json({ error: 'Użytkownik nie znaleziony' }, 404)
     }
     const deletedUser = users.splice(index, 1)[0]
     await fs.writeFile(usersPath, JSON.stringify(users, null, 2))
-    return c.json({message: 'Użytkownik usunięty', user: deletedUser})
-  }catch (error) {
+    return c.json({ message: 'Użytkownik usunięty', user: deletedUser })
+  } catch (error) {
     console.error('Błąd przy usuwaniu użytkownika', err)
-    return c.json({error: 'Wystąpił błąd serwera'}, 500)
+    return c.json({ error: 'Wystąpił błąd serwera' }, 500)
   }
 })
 
 /**
  * http DELETE http://localhost:3000/auth/users/<userId> \
  * "Authoriztion: Bearer <token_admina>"
- * 
- * to muszę sobie jeszcze przeanalizować 
+ *
+ * to muszę sobie jeszcze przeanalizować
  */
-
 
 //! aktualizacja użytkownika trzeba poprawić !!!
 //* zalogowany jako admin mogę zmienić każdego usera
 //* zalogowany jako user mogę zmienić tylko siebie
 
-authController.patch('/users/:id', authMiddleware, async(c)=>{
-  const userId = c.req.param('id')
+authController.patch('/users/:id', authMiddleware, async (c) => {
+  console.log('jestem w /user/id')
+  const userIdFromToken = c.get('userId')
+  const userRole = c.get('role')
+  const userIdFromParam = c.req.param('id')
   const updates = await c.req.json()
 
-  try{
+  try {
     const users = JSON.parse(await fs.readFile(usersPath, 'utf-8'))
-    const user = users.find((user) => user.id === userId)
-    if(!user) {
-      return c.json({error: 'Użytkownik nie znaleziony'}, 404)
+    const user = users.find((user) => user.id === userIdFromParam)
+    if (!user) {
+      return c.json({ error: 'Nie znaleziono użytkownika - /users/id' }, 404)
     }
-    if (updates.email) user.email = updates.email
-    if (updates.password) user.password = await bcrypt.hash(updates.password, 10)
-    if (updates.role) user.role = updates.role
 
+    //* 🛡️ Sprawdzenie uprawnień
+    if (userIdFromToken !== userIdFromParam && userRole !== 'admin') {
+      return c.json({ errr: 'Brak uprawnień do edycji tego użytkownika' }, 403)
+    }
+
+    //* Dozwolone pola do edycji
+    if (updates.email) user.email = updates.email
+    if (updates.role && userRole === 'admin') user.role = updates.role
+    if (updates.password)
+      user.password = await bcrypt.hash(updates.password, 10)
     await fs.writeFile(usersPath, JSON.stringify(users, null, 2))
-    return c.json({message: 'Użytkownik zaktualizowany', user})
-  }catch(error){
-    console.log('Błąd przy aktualizacji:', error)
-    return c.json({error: 'Błąd serwera'}, 500)
+    return c.json({ message: 'Użytkownik zaktualizowany', user })
+  } catch (error) {
+    console.log('Błąd przy aktualizacji użytkownika - /users/id', error)
+    return c.json({ error: 'Błąd serwera' }, 500)
   }
 })
 
 /**
  * httpie
- * 
+ *
  * http PATCH http://localhost:3000/auth/users/<id> \
  * "Authorization:Bearer $TOKEN" \
  * role=admin
+ */
+
+/**
+ * sprawdzanie uprawnień:
+ * if (JESTEM_INNYM_UŻYTKOWNIKIEM && NIE_JESTEM_ADMINEM) {
+ *  ZABLOKUJ
+ * }
+ *
  */
