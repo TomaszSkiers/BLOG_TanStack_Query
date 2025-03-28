@@ -176,7 +176,6 @@ authController.delete('/users/:id', authMiddleware, requireAdmin, async (c) => {
  * to muszę sobie jeszcze przeanalizować
  */
 
-//! aktualizacja użytkownika trzeba poprawić !!!
 //* zalogowany jako admin mogę zmienić każdego usera
 //* zalogowany jako user mogę zmienić tylko siebie
 
