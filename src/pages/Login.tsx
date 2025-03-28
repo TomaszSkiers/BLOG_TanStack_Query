@@ -15,11 +15,13 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
+import { useLogin } from '../hooks/useLogin'
 
 export const Login = () => {
   const theme = useTheme()
   const styles = getLoginStyles(theme)
   //console.log(theme)
+  const loginMutation = useLogin()
 
   const [formData, setFormData] = useState<LoginData>({
     email: '',
@@ -47,6 +49,10 @@ export const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Logowanie...', formData)
+    loginMutation.mutate({
+        email: formData.email,
+        password: formData.password
+    })
   }
 
   return (
