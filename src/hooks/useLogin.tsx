@@ -10,7 +10,7 @@ interface LoginResponse {
     token: string
 }
 
-export const useLogin = () => {
+export const useLogin = (loginOrSessionStorage: boolean) => {
 
     return useMutation<LoginResponse, unknown, LoginPayload>({
         mutationFn: async (credentials) => {
@@ -18,8 +18,14 @@ export const useLogin = () => {
             return response.data
         },
         onSuccess: (data) => {
-            localStorage.setItem('token', data.token)
-            console.log('token pobrany i zapisany do localstorage')
+            if(loginOrSessionStorage) {
+
+                localStorage.setItem('token', data.token)
+                console.log('token pobrany i zapisany do localstorage')
+            }else{
+                sessionStorage.setItem('token', data.token)
+                console.log('token pobrany i zapisaby w sessionstorage')
+            }
         },
         onError: (error) => {
             console.log('błąd logowania', error)

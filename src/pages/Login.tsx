@@ -21,13 +21,14 @@ export const Login = () => {
   const theme = useTheme()
   const styles = getLoginStyles(theme)
   //console.log(theme)
-  const loginMutation = useLogin()
 
   const [formData, setFormData] = useState<LoginData>({
     email: '',
     password: '',
     remember: false,
   })
+
+  const loginMutation = useLogin(formData.remember)
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -50,8 +51,8 @@ export const Login = () => {
     e.preventDefault()
     console.log('Logowanie...', formData)
     loginMutation.mutate({
-        email: formData.email,
-        password: formData.password
+      email: formData.email,
+      password: formData.password,
     })
   }
 
@@ -76,7 +77,7 @@ export const Login = () => {
           fullWidth
           value={formData.password}
           onChange={handleChange}
-          sx={{mt: 2}}
+          sx={{ mt: 2 }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
