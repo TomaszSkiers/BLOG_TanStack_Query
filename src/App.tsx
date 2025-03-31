@@ -7,7 +7,9 @@ import { MainLayout } from './layout/MainLayout'
 import { Home } from './pages/Home'
 import { Blog } from './pages/Blog'
 import { Contact } from './pages/Contact'
-import { Login } from './pages/Login'
+import { LoginForm } from './pages/LoginForm'
+import { Dashboard } from './pages/Dashboard'
+import { ProtectedRouteDashboard } from './components/ProtectedRouteDashboard'
 
 export const App = () => {
   return (
@@ -18,8 +20,16 @@ export const App = () => {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="blog" element={<Blog />} />
-            <Route path='contact' element={<Contact/>} />
-            <Route path='login' element={<Login/>} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRouteDashboard>
+                  <Dashboard />
+                </ProtectedRouteDashboard>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

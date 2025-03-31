@@ -10,17 +10,18 @@ import { getLoginStyles } from '../styles/login'
 import LoginIcon from '@mui/icons-material/Login'
 import Checkbox from '@mui/material/Checkbox'
 import { LoginData } from '../types/loginTypes'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useLogin } from '../hooks/useLogin'
+import { useNavigate } from 'react-router-dom'
 
-export const Login = () => {
+export const LoginForm: FC = () => {
   const theme = useTheme()
   const styles = getLoginStyles(theme)
-  //console.log(theme)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState<LoginData>({
     email: '',
@@ -54,6 +55,7 @@ export const Login = () => {
       email: formData.email,
       password: formData.password,
     })
+    navigate('/blog') 
   }
 
   return (
