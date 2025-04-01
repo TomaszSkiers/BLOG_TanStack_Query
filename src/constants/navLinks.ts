@@ -1,6 +1,12 @@
-export const NAV_LINKS = [
+interface Links {
+  path: string
+  label: string
+}
+[]
+
+export const NAV_LINKS: Links[] = [
   { path: '/', label: 'O mnie' },
   { path: '/blog', label: 'Blog' },
   { path: '/contact', label: 'Kontakt' },
-  { path: '/dashboard', label: 'Zaloguj'},
+  { path: '/dashboard', label: 'Zaloguj' },
 ]

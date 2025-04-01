@@ -6,6 +6,7 @@ import { NAV_LINKS } from '../constants/navLinks'
 import { getHeaderStyles } from '../styles/header'
 import { Link, useMediaQuery } from '@mui/material'
 
+
 export const NavLinks = memo(() => {
   const location = useLocation()
   const theme = useTheme()
