@@ -13,3 +13,4 @@ export const ProtectedRouteDashboard = ({children}: {children: JSX.Element}) =>{
 
     return children
 }
+
