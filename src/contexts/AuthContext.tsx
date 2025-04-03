@@ -2,6 +2,7 @@ import {
   createContext,
   ReactNode,
   useEffect,
+  useMemo,
   useState,
 } from 'react'
 
@@ -15,6 +16,8 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(null)
+
+  console.log('authContext test tokena',token)
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token')
@@ -35,14 +38,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem('token')
   }
 
+  const value = useMemo(
+    () => ({
+      token,
+      isAuthenticated: !!token,
+      login,
+      logout,
+    }),[token]
+  )
+
   return (
     <AuthContext.Provider
-      value={{
-        token,
-        isAuthenticated: !!token,
-        login,
-        logout,
-      }}
+      value={value}
     >
       {children}
     </AuthContext.Provider>

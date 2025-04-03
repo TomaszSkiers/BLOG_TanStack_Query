@@ -1,11 +1,12 @@
 import { useTheme } from '@mui/material/styles'
 import { memo, useMemo } from 'react'
-import { Link as RouterLink, useLocation} from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../constants/navLinks'
 
 import { getHeaderStyles } from '../styles/header'
 import { Link, useMediaQuery } from '@mui/material'
 
+import { useAuth } from '../hooks/useAuth'
 
 export const NavLinks = memo(() => {
   const location = useLocation()
@@ -15,11 +16,13 @@ export const NavLinks = memo(() => {
     () => getHeaderStyles(isSmallScreen),
     [isSmallScreen, theme],
   )
+  const { isAuthenticated } = useAuth()
 
   return (
     <>
+      {/* static LINKS */}
       {NAV_LINKS.map(({ path, label }) => {
-        const isActive = location.pathname === path
+        const isActive = location.pathname === path //compare active link with paht from constans/NAV_LINKS
         return (
           <Link
             key={path}
@@ -32,6 +35,27 @@ export const NavLinks = memo(() => {
           </Link>
         )
       })}
+
+      {/* dynamic link which depends from login state */}
+      {isAuthenticated ? (
+        <Link
+          component={RouterLink}
+          to="/dashboard"
+          sx={styles.links(location.pathname === '/dashboard', theme)}
+          aria-currnet={location.pathname === '/dashboard' ? 'page' : undefined}
+        >
+          Wyloguj
+        </Link>
+      ) : (
+        <Link
+          component={RouterLink}
+          to="/login"
+          sx={styles.links(location.pathname === '/login', theme)}
+          aria-currnet={location.pathname === '/login' ? 'page' : undefined}
+        >
+          Zaloguj
+        </Link>
+      )}
     </>
   )
 })

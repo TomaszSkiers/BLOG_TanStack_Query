@@ -1,14 +1,15 @@
 import { Button } from '@mui/material'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { logout } from '../utils/functions'
+import { useAuth } from '../hooks/useAuth'
 
 export const Dashboard: FC = () => {
   const navigate = useNavigate()
+  const {logout} = useAuth()
 
   const handleLogout = (): void => {
     logout()
-    navigate('/blog', {replace: true})
+    navigate('blog', {replace: true})
   }
 
   return (
@@ -24,3 +25,5 @@ export const Dashboard: FC = () => {
 }
 
 
+
+//todo it doesen't redirect me to the right page

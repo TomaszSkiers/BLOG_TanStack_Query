@@ -1,13 +1,13 @@
 import { JSX } from "react";
 import { Navigate } from "react-router-dom";
-import { getToken } from "../utils/functions";
+import  {useAuth} from '../hooks/useAuth'
 
 
 
 export const ProtectedRouteDashboard = ({children}: {children: JSX.Element}) =>{
-    const token = getToken()
+    const {isAuthenticated} = useAuth()
 
-    if (!token) {
+    if (!isAuthenticated) {
         return <Navigate to='/login' replace />
     }
 
