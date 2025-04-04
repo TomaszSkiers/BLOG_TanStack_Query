@@ -1,11 +1,42 @@
-import { Container, Typography } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { PostList } from '../components/PostsList'
 
 export const Blog = () => {
   return (
-    <Container maxWidth='md'>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        overflow: 'hidden', // <-- zapobiega wypychaniu kontenera
+        height: '100%'      // <-- rozciąga się do wysokości rodzica
+      }}
+    >
       <Typography>Witam ze strony Bloga</Typography>
-      <PostList/>
-    </Container>
+
+      <Box
+        sx={(theme) => ({
+          flex: 1,
+          overflowY: 'auto',
+          mt: 2,
+          pr: 1,
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: theme.palette.background.default,
+          },
+          scrollbarWidth: 'thin',
+          scrollbarColor: `${theme.palette.primary.main} ${theme.palette.background.default}`,
+        })}
+      >
+        <PostList />
+      </Box>
+    </Box>
   )
 }
+

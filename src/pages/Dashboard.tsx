@@ -14,7 +14,7 @@ export const Dashboard: FC = () => {
 
   return (
     <>
-      <Container maxWidth='md'>
+      <Container maxWidth='md' disableGutters>
       <h1>witaj z komponentu bashboard</h1>
       <h2>
         tutaj będą narzędzia np: dadawanie komentarzy <br />

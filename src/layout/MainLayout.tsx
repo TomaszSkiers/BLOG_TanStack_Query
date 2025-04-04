@@ -5,10 +5,31 @@ import { Footer } from '../components/Footer'
 
 export const MainLayout = () => {
   return (
-    <Box display='flex' flexDirection='column' minHeight='100vh'>
+    <Box display="flex" flexDirection="column" height="100vh">
       <Header />
-      <Box component='main' flexGrow={1} py={4}>
-        <Container>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden' // <-- ważne, żeby nie rozciągało się za bardzo
+        }}
+      >
+        <Container
+          maxWidth="md"
+          // disableGutters
+          sx={{
+            // border: '1px solid red',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            overflow: 'hidden', // <-- kluczowe
+            
+          }}
+        >
           <Outlet />
         </Container>
       </Box>
@@ -16,3 +37,4 @@ export const MainLayout = () => {
     </Box>
   )
 }
+
