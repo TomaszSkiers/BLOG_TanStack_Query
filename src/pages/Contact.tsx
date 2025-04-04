@@ -1,5 +1,9 @@
-import { Typography } from "@mui/material"
+import { Container, Typography } from '@mui/material'
 
 export const Contact = () => {
-    return(<Typography>Witam ze strony Kontak</Typography>)
+  return (
+    <Container maxWidth="md">
+      <Typography>Witam ze strony Kontak</Typography>
+    </Container>
+  )
 }

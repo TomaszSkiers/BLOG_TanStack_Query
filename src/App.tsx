@@ -1,5 +1,5 @@
 import './App.css'
-import { CssBaseline } from '@mui/material'
+import { CssBaseline, GlobalStyles } from '@mui/material'
 import { AppProvider } from './contexts/AppProvider'
 
 import { Route, Routes } from 'react-router-dom'
@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <AppProvider>
       <CssBaseline />
-
+      
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />

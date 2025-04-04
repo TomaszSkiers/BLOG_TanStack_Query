@@ -55,7 +55,7 @@ export const LoginForm: FC = () => {
       email: formData.email,
       password: formData.password,
     })
-    navigate('/blog') 
+    navigate('/') 
   }
 
   return (

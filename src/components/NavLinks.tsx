@@ -44,7 +44,7 @@ export const NavLinks = memo(() => {
           sx={styles.links(location.pathname === '/dashboard', theme)}
           aria-currnet={location.pathname === '/dashboard' ? 'page' : undefined}
         >
-          Wyloguj
+          Pulpit
         </Link>
       ) : (
         <Link

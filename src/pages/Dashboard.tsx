@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Container } from '@mui/material'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
@@ -14,12 +14,14 @@ export const Dashboard: FC = () => {
 
   return (
     <>
+      <Container maxWidth='md'>
       <h1>witaj z komponentu bashboard</h1>
       <h2>
         tutaj będą narzędzia np: dadawanie komentarzy <br />
         lub dodawanie postów{' '}
       </h2>
       <Button onClick={handleLogout}>Wyloguj mnie</Button>
+      </Container>
     </>
   )
 }
