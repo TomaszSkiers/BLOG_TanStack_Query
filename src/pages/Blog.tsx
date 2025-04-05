@@ -8,8 +8,8 @@ export const Blog = () => {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        overflow: 'hidden', // <-- zapobiega wypychaniu kontenera
-        height: '100%'      // <-- rozciąga się do wysokości rodzica
+        overflow: 'hidden', 
+        height: '100%'      
       }}
     >
       <Typography>Witam ze strony Bloga</Typography>

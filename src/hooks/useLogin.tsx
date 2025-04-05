@@ -30,5 +30,4 @@ export const useLogin = (whetherContextOrLocalStorage: boolean) => {
     },
   })
 }
-//* to już nie będzie loginOrSessionStroage tylko contextOrSessionStorage nie
-//*
+

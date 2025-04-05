@@ -14,20 +14,17 @@ export const MainLayout = () => {
           py: 4,
           display: 'flex',
           flexDirection: 'column',
-          overflow: 'hidden' // <-- ważne, żeby nie rozciągało się za bardzo
+          overflow: 'hidden',
         }}
       >
         <Container
           maxWidth="md"
-          // disableGutters
           sx={{
-            // border: '1px solid red',
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
             height: '100%',
-            overflow: 'hidden', // <-- kluczowe
-            
+            overflow: 'hidden',
           }}
         >
           <Outlet />
@@ -37,4 +34,3 @@ export const MainLayout = () => {
     </Box>
   )
 }
-

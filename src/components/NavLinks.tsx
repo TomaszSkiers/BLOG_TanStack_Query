@@ -42,7 +42,7 @@ export const NavLinks = memo(() => {
           component={RouterLink}
           to="/dashboard"
           sx={styles.links(location.pathname === '/dashboard', theme)}
-          aria-currnet={location.pathname === '/dashboard' ? 'page' : undefined}
+          aria-current={location.pathname === '/dashboard' ? 'page' : undefined}
         >
           Pulpit
         </Link>
@@ -51,7 +51,7 @@ export const NavLinks = memo(() => {
           component={RouterLink}
           to="/login"
           sx={styles.links(location.pathname === '/login', theme)}
-          aria-currnet={location.pathname === '/login' ? 'page' : undefined}
+          aria-current={location.pathname === '/login' ? 'page' : undefined}
         >
           Zaloguj
         </Link>

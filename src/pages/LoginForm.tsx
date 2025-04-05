@@ -9,83 +9,57 @@ import { useTheme } from '@mui/material/styles'
 import { getLoginStyles } from '../styles/login'
 import LoginIcon from '@mui/icons-material/Login'
 import Checkbox from '@mui/material/Checkbox'
-import { LoginData } from '../types/loginTypes'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import { useLogin } from '../hooks/useLogin'
-import { useNavigate } from 'react-router-dom'
+import { Alert } from '@mui/material'
+import { useLoginForm } from '../hooks/useLoginForm'
 
 export const LoginForm: FC = () => {
   const theme = useTheme()
   const styles = getLoginStyles(theme)
-  const navigate = useNavigate()
 
-  const [formData, setFormData] = useState<LoginData>({
-    email: '',
-    password: '',
-    remember: false,
-  })
-
-  const loginMutation = useLogin(formData.remember)
-
-  const [showPassword, setShowPassword] = useState(false)
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev)
-  }
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target
-    setFormData((prv) => ({ ...prv, [name]: value }))
-  }
-
-  const handleCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prv) => ({ ...prv, remember: e.target.checked }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Logowanie...', formData)
-    loginMutation.mutate({
-      email: formData.email,
-      password: formData.password,
-    })
-    navigate('/') 
-  }
+  const {
+    register,
+    handleSubmit,
+    errors,
+    isSubmitting,
+    showPassword,
+    togglePasswordVisibility,
+    onSubmit,
+    loginError,
+    loginPending,
+  } = useLoginForm()
 
   return (
     <Container maxWidth="md">
       <Box sx={{ textAlign: 'center', m: 3 }}>
         <LoginIcon sx={{ fontSize: 40, color: theme.palette.primary.main }} />
       </Box>
-      <Box component="form" onSubmit={handleSubmit} sx={styles.form}>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={styles.form}>
         <TextField
           fullWidth
           label="e-mail"
-          name="email"
           type="email"
-          value={formData.email}
-          onChange={handleChange}
+          {...register('email')}
+          error={!!errors.email}
+          helperText={errors.email?.message}
         />
         <TextField
           label="Hasło"
-          name="password"
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          value={formData.password}
-          onChange={handleChange}
+          {...register('password')}
+          error={!!errors.password}
+          helperText={errors.password?.message}
           sx={{ mt: 2 }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   onClick={togglePasswordVisibility}
-                  edge="end"
                   aria-label="Pokaż/ukryj hasło"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -96,23 +70,25 @@ export const LoginForm: FC = () => {
         />
 
         <FormControlLabel
-          control={
-            <Checkbox
-              checked={formData.remember}
-              onChange={handleCheckBoxChange}
-              sx={styles.checkBox}
-            />
-          }
+          control={<Checkbox {...register('remember')} sx={styles.checkBox} />}
           label="Zapamiętaj mnie"
         />
+
+        {loginError && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            Nie udało sie zalogować. Sprawdź dane logowania.
+          </Alert>
+        )}
+
         <Button
           fullWidth
           type="submit"
           variant="contained"
           startIcon={<LoginIcon />}
           sx={{ mt: 2 }}
+          disabled={isSubmitting || loginPending}
         >
-          Zaloguj
+          {isSubmitting || loginPending ? 'Logowanie...' : 'Zaloguj'}
         </Button>
       </Box>
     </Container>
