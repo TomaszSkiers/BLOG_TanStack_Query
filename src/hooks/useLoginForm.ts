@@ -16,6 +16,7 @@ export type LoginFormValues = z.infer<typeof loginSchema>
 export const useLoginForm = () => {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
+  console.log(showPassword)
 
   const {
     register,
@@ -35,7 +36,7 @@ export const useLoginForm = () => {
   const loginMutation = useLogin(remember)
 
   const togglePasswordVisibility = () => {
-    setShowPassword((prev) => prev!)
+    setShowPassword((prev) => !prev)
   }
 
   const onSubmit = (data: LoginFormValues) => {
