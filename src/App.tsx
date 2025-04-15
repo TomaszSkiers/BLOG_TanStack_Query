@@ -10,8 +10,14 @@ import { Contact } from './pages/Contact'
 import { LoginForm } from './pages/LoginForm'
 import { Dashboard } from './pages/Dashboard'
 import { ProtectedRouteDashboard } from './components/ProtectedRouteDashboard'
+import { useEffect } from 'react'
 
 export const App = () => {
+  useEffect(() => {
+    const loader = document.getElementById('app-loader')
+    if (loader) loader.remove()
+  }, [])
+
   return (
     <AppProvider>
       <CssBaseline />
